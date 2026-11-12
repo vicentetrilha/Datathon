@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+.env
+chave.py
+Novo_Caged_MOV_Limpo.csv
+Base_Consolidada_Datathon.csv

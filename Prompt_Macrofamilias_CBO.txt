@@ -1,0 +1,1277 @@
+Atue como um especialista em Economia do Trabalho e Classificação Brasileira de Ocupações (CBO 2002).
+Abaixo está uma lista JSON contendo códigos CBO presentes nas movimentações do Novo CAGED em Santa Catarina, acompanhados do setor econômico predominante e do volume de registros.
+
+TAREFA:
+1. Identifique o título oficial de cada código CBO 2002.
+2. Classifique cada ocupação em UMA das seguintes macrofamílias padronizadas:
+   - "Gestão, Liderança e Diretoria"
+   - "Tecnologia, Dados e Engenharia"
+   - "Administrativo, Financeiro e Escritório"
+   - "Comércio, Vendas e Atendimento"
+   - "Operações Industriais e Produção"
+   - "Construção Civil e Manutenção"
+   - "Logística, Transporte e Armazenagem"
+   - "Agropecuária e Extrativismo"
+   - "Saúde, Educação e Serviços Sociais"
+   - "Turismo, Hotelaria e Alimentação"
+   - "Serviços Gerais e Apoio Operacional"
+
+FORMATO DE SAÍDA OBRIGATÓRIO:
+Retorne EXCLUSIVAMENTE um array JSON válido (sem blocos de texto explicativo antes ou depois) no seguinte formato:
+[
+  {"cbo": "521110", "descricao_cbo": "Vendedor de comércio varejista", "macrofamilia": "Comércio, Vendas e Atendimento"}
+]
+
+DADOS DE ENTRADA (CBOs):
+[
+  {
+    "cbo": "784205",
+    "setor_predominante": "Indústrias de Transformação",
+    "total_movimentacoes": 258112
+  },
+  {
+    "cbo": "514320",
+    "setor_predominante": "Atividades Administrativas",
+    "total_movimentacoes": 176546
+  },
+  {
+    "cbo": "521110",
+    "setor_predominante": "Comércio e Reparação de Veículos",
+    "total_movimentacoes": 156815
+  },
+  {
+    "cbo": "782510",
+    "setor_predominante": "Transporte, Armazenagem e Correio",
+    "total_movimentacoes": 108552
+  },
+  {
+    "cbo": "411005",
+    "setor_predominante": "Comércio e Reparação de Veículos",
+    "total_movimentacoes": 100657
+  },
+  {
+    "cbo": "421125",
+    "setor_predominante": "Comércio e Reparação de Veículos",
+    "total_movimentacoes": 97728
+  },
+  {
+    "cbo": "411010",
+    "setor_predominante": "Indústrias de Transformação",
+    "total_movimentacoes": 88274
+  },
+  {
+    "cbo": "521140",
+    "setor_predominante": "Comércio e Reparação de Veículos",
+    "total_movimentacoes": 86117
+  },
+  {
+    "cbo": "717020",
+    "setor_predominante": "Construção",
+    "total_movimentacoes": 74924
+  },
+  {
+    "cbo": "513505",
+    "setor_predominante": "Alojamento e Alimentação",
+    "total_movimentacoes": 72150
+  },
+  {
+    "cbo": "521125",
+    "setor_predominante": "Comércio e Reparação de Veículos",
+    "total_movimentacoes": 69692
+  },
+  {
+    "cbo": "414105",
+    "setor_predominante": "Comércio e Reparação de Veículos",
+    "total_movimentacoes": 50672
+  },
+  {
+    "cbo": "513435",
+    "setor_predominante": "Alojamento e Alimentação",
+    "total_movimentacoes": 49228
+  },
+  {
+    "cbo": "715210",
+    "setor_predominante": "Construção",
+    "total_movimentacoes": 46937
+  },
+  {
+    "cbo": "422105",
+    "setor_predominante": "Atividades Administrativas",
+    "total_movimentacoes": 44206
+  },
+  {
+    "cbo": "513205",
+    "setor_predominante": "Alojamento e Alimentação",
+    "total_movimentacoes": 37909
+  },
+  {
+    "cbo": "414140",
+    "setor_predominante": "Transporte, Armazenagem e Correio",
+    "total_movimentacoes": 37009
+  },
+  {
+    "cbo": "848520",
+    "setor_predominante": "Indústrias de Transformação",
+    "total_movimentacoes": 33345
+  },
+  {
+    "cbo": "521135",
+    "setor_predominante": "Comércio e Reparação de Veículos",
+    "total_movimentacoes": 30206
+  },
+  {
+    "cbo": "783225",
+    "setor_predominante": "Transporte, Armazenagem e Correio",
+    "total_movimentacoes": 28181
+  },
+  {
+    "cbo": "414110",
+    "setor_predominante": "Comércio e Reparação de Veículos",
+    "total_movimentacoes": 26573
+  },
+  {
+    "cbo": "354125",
+    "setor_predominante": "Comércio e Reparação de Veículos",
+    "total_movimentacoes": 24780
+  },
+  {
+    "cbo": "784105",
+    "setor_predominante": "Indústrias de Transformação",
+    "total_movimentacoes": 24671
+  },
+  {
+    "cbo": "517330",
+    "setor_predominante": "Atividades Administrativas",
+    "total_movimentacoes": 24243
+  },
+  {
+    "cbo": "513405",
+    "setor_predominante": "Alojamento e Alimentação",
+    "total_movimentacoes": 24075
+  },
+  {
+    "cbo": "322205",
+    "setor_predominante": "Saúde Humana e Serviços Sociais",
+    "total_movimentacoes": 22975
+  },
+  {
+    "cbo": "763210",
+    "setor_predominante": "Indústrias de Transformação",
+    "total_movimentacoes": 21109
+  },
+  {
+    "cbo": "414135",
+    "setor_predominante": "Indústrias de Transformação",
+    "total_movimentacoes": 20439
+  },
+  {
+    "cbo": "763215",
+    "setor_predominante": "Indústrias de Transformação",
+    "total_movimentacoes": 19581
+  },
+  {
+    "cbo": "715505",
+    "setor_predominante": "Construção",
+    "total_movimentacoes": 18640
+  },
+  {
+    "cbo": "622505",
+    "setor_predominante": "Agropecuária, Florestal e Pesca",
+    "total_movimentacoes": 18442
+  },
+  {
+    "cbo": "521130",
+    "setor_predominante": "Comércio e Reparação de Veículos",
+    "total_movimentacoes": 18240
+  },
+  {
+    "cbo": "724315",
+    "setor_predominante": "Indústrias de Transformação",
+    "total_movimentacoes": 17665
+  },
+  {
+    "cbo": "848510",
+    "setor_predominante": "Comércio e Reparação de Veículos",
+    "total_movimentacoes": 16997
+  },
+  {
+    "cbo": "414125",
+    "setor_predominante": "Comércio e Reparação de Veículos",
+    "total_movimentacoes": 16445
+  },
+  {
+    "cbo": "783215",
+    "setor_predominante": "Transporte, Armazenagem e Correio",
+    "total_movimentacoes": 16083
+  },
+  {
+    "cbo": "763125",
+    "setor_predominante": "Indústrias de Transformação",
+    "total_movimentacoes": 15858
+  },
+  {
+    "cbo": "782310",
+    "setor_predominante": "Comércio e Reparação de Veículos",
+    "total_movimentacoes": 15505
+  },
+  {
+    "cbo": "521115",
+    "setor_predominante": "Comércio e Reparação de Veículos",
+    "total_movimentacoes": 15021
+  },
+  {
+    "cbo": "911305",
+    "setor_predominante": "Indústrias de Transformação",
+    "total_movimentacoes": 14404
+  },
+  {
+    "cbo": "413110",
+    "setor_predominante": "Atividades Profissionais e Técnicas",
+    "total_movimentacoes": 14389
+  },
+  {
+    "cbo": "514120",
+    "setor_predominante": "Atividades Administrativas",
+    "total_movimentacoes": 14130
+  },
+  {
+    "cbo": "914405",
+    "setor_predominante": "Comércio e Reparação de Veículos",
+    "total_movimentacoes": 13793
+  },
+  {
+    "cbo": "414215",
+    "setor_predominante": "Transporte, Armazenagem e Correio",
+    "total_movimentacoes": 12938
+  },
+  {
+    "cbo": "513315",
+    "setor_predominante": "Alojamento e Alimentação",
+    "total_movimentacoes": 12932
+  },
+  {
+    "cbo": "331110",
+    "setor_predominante": "Educação",
+    "total_movimentacoes": 12606
+  },
+  {
+    "cbo": "761815",
+    "setor_predominante": "Indústrias de Transformação",
+    "total_movimentacoes": 12464
+  },
+  {
+    "cbo": "862150",
+    "setor_predominante": "Indústrias de Transformação",
+    "total_movimentacoes": 12362
+  },
+  {
+    "cbo": "782220",
+    "setor_predominante": "Indústrias de Transformação",
+    "total_movimentacoes": 12023
+  },
+  {
+    "cbo": "716610",
+    "setor_predominante": "Construção",
+    "total_movimentacoes": 11822
+  },
+  {
+    "cbo": "715615",
+    "setor_predominante": "Construção",
+    "total_movimentacoes": 11484
+  },
+  {
+    "cbo": "621005",
+    "setor_predominante": "Agropecuária, Florestal e Pesca",
+    "total_movimentacoes": 11357
+  },
+  {
+    "cbo": "724205",
+    "setor_predominante": "Indústrias de Transformação",
+    "total_movimentacoes": 11155
+  },
+  {
+    "cbo": "514225",
+    "setor_predominante": "Atividades Administrativas",
+    "total_movimentacoes": 11145
+  },
+  {
+    "cbo": "514325",
+    "setor_predominante": "Atividades Administrativas",
+    "total_movimentacoes": 10600
+  },
+  {
+    "cbo": "517420",
+    "setor_predominante": "Atividades Administrativas",
+    "total_movimentacoes": 10141
+  },
+  {
+    "cbo": "715525",
+    "setor_predominante": "Construção",
+    "total_movimentacoes": 9971
+  },
+  {
+    "cbo": "517410",
+    "setor_predominante": "Atividades Administrativas",
+    "total_movimentacoes": 9755
+  },
+  {
+    "cbo": "223505",
+    "setor_predominante": "Saúde Humana e Serviços Sociais",
+    "total_movimentacoes": 9669
+  },
+  {
+    "cbo": "783210",
+    "setor_predominante": "Transporte, Armazenagem e Correio",
+    "total_movimentacoes": 9502
+  },
+  {
+    "cbo": "715315",
+    "setor_predominante": "Construção",
+    "total_movimentacoes": 9404
+  },
+  {
+    "cbo": "521105",
+    "setor_predominante": "Comércio e Reparação de Veículos",
+    "total_movimentacoes": 9247
+  },
+  {
+    "cbo": "391205",
+    "setor_predominante": "Indústrias de Transformação",
+    "total_movimentacoes": 9092
+  },
+  {
+    "cbo": "410105",
+    "setor_predominante": "Atividades Administrativas",
+    "total_movimentacoes": 8973
+  },
+  {
+    "cbo": "771105",
+    "setor_predominante": "Indústrias de Transformação",
+    "total_movimentacoes": 8555
+  },
+  {
+    "cbo": "422310",
+    "setor_predominante": "Atividades Administrativas",
+    "total_movimentacoes": 8394
+  },
+  {
+    "cbo": "514205",
+    "setor_predominante": "Água, Esgoto e Resíduos",
+    "total_movimentacoes": 8041
+  },
+  {
+    "cbo": "414210",
+    "setor_predominante": "Indústrias de Transformação",
+    "total_movimentacoes": 8027
+  },
+  {
+    "cbo": "422110",
+    "setor_predominante": "Saúde Humana e Serviços Sociais",
+    "total_movimentacoes": 7739
+  },
+  {
+    "cbo": "710205",
+    "setor_predominante": "Construção",
+    "total_movimentacoes": 7731
+  },
+  {
+    "cbo": "142105",
+    "setor_predominante": "Comércio e Reparação de Veículos",
+    "total_movimentacoes": 7726
+  },
+  {
+    "cbo": "223405",
+    "setor_predominante": "Comércio e Reparação de Veículos",
+    "total_movimentacoes": 7561
+  },
+  {
+    "cbo": "252405",
+    "setor_predominante": "Indústrias de Transformação",
+    "total_movimentacoes": 7486
+  },
+  {
+    "cbo": "731175",
+    "setor_predominante": "Indústrias de Transformação",
+    "total_movimentacoes": 7411
+  },
+  {
+    "cbo": "622020",
+    "setor_predominante": "Agropecuária, Florestal e Pesca",
+    "total_movimentacoes": 7055
+  },
+  {
+    "cbo": "631210",
+    "setor_predominante": "Agropecuária, Florestal e Pesca",
+    "total_movimentacoes": 6959
+  },
+  {
+    "cbo": "761005",
+    "setor_predominante": "Indústrias de Transformação",
+    "total_movimentacoes": 6902
+  },
+  {
+    "cbo": "317210",
+    "setor_predominante": "Informação e Comunicação",
+    "total_movimentacoes": 6866
+  },
+  {
+    "cbo": "141415",
+    "setor_predominante": "Comércio e Reparação de Veículos",
+    "total_movimentacoes": 6769
+  },
+  {
+    "cbo": "724110",
+    "setor_predominante": "Construção",
+    "total_movimentacoes": 6671
+  },
+  {
+    "cbo": "517425",
+    "setor_predominante": "Comércio e Reparação de Veículos",
+    "total_movimentacoes": 6558
+  },
+  {
+    "cbo": "516210",
+    "setor_predominante": "Saúde Humana e Serviços Sociais",
+    "total_movimentacoes": 6497
+  },
+  {
+    "cbo": "721215",
+    "setor_predominante": "Indústrias de Transformação",
+    "total_movimentacoes": 6218
+  },
+  {
+    "cbo": "715305",
+    "setor_predominante": "Construção",
+    "total_movimentacoes": 6058
+  },
+  {
+    "cbo": "351605",
+    "setor_predominante": "Indústrias de Transformação",
+    "total_movimentacoes": 6003
+  },
+  {
+    "cbo": "212405",
+    "setor_predominante": "Informação e Comunicação",
+    "total_movimentacoes": 5905
+  },
+  {
+    "cbo": "513425",
+    "setor_predominante": "Alojamento e Alimentação",
+    "total_movimentacoes": 5891
+  },
+  {
+    "cbo": "811770",
+    "setor_predominante": "Indústrias de Transformação",
+    "total_movimentacoes": 5874
+  },
+  {
+    "cbo": "354120",
+    "setor_predominante": "Informação e Comunicação",
+    "total_movimentacoes": 5870
+  },
+  {
+    "cbo": "848305",
+    "setor_predominante": "Comércio e Reparação de Veículos",
+    "total_movimentacoes": 5772
+  },
+  {
+    "cbo": "725205",
+    "setor_predominante": "Indústrias de Transformação",
+    "total_movimentacoes": 5758
+  },
+  {
+    "cbo": "519935",
+    "setor_predominante": "Comércio e Reparação de Veículos",
+    "total_movimentacoes": 5681
+  },
+  {
+    "cbo": "317110",
+    "setor_predominante": "Informação e Comunicação",
+    "total_movimentacoes": 5646
+  },
+  {
+    "cbo": "421310",
+    "setor_predominante": "Atividades Administrativas",
+    "total_movimentacoes": 5616
+  },
+  {
+    "cbo": "252105",
+    "setor_predominante": "Comércio e Reparação de Veículos",
+    "total_movimentacoes": 5607
+  },
+  {
+    "cbo": "142335",
+    "setor_predominante": "Indústrias de Transformação",
+    "total_movimentacoes": 5531
+  },
+  {
+    "cbo": "623215",
+    "setor_predominante": "Agropecuária, Florestal e Pesca",
+    "total_movimentacoes": 5406
+  },
+  {
+    "cbo": "231210",
+    "setor_predominante": "Administração Pública e Seguridade",
+    "total_movimentacoes": 5287
+  },
+  {
+    "cbo": "514310",
+    "setor_predominante": "Atividades Administrativas",
+    "total_movimentacoes": 5286
+  },
+  {
+    "cbo": "212420",
+    "setor_predominante": "Informação e Comunicação",
+    "total_movimentacoes": 5246
+  },
+  {
+    "cbo": "774105",
+    "setor_predominante": "Indústrias de Transformação",
+    "total_movimentacoes": 5227
+  },
+  {
+    "cbo": "252210",
+    "setor_predominante": "Atividades Profissionais e Técnicas",
+    "total_movimentacoes": 5213
+  },
+  {
+    "cbo": "520110",
+    "setor_predominante": "Comércio e Reparação de Veículos",
+    "total_movimentacoes": 4962
+  },
+  {
+    "cbo": "724440",
+    "setor_predominante": "Indústrias de Transformação",
+    "total_movimentacoes": 4898
+  },
+  {
+    "cbo": "422120",
+    "setor_predominante": "Alojamento e Alimentação",
+    "total_movimentacoes": 4884
+  },
+  {
+    "cbo": "782410",
+    "setor_predominante": "Transporte, Armazenagem e Correio",
+    "total_movimentacoes": 4623
+  },
+  {
+    "cbo": "142330",
+    "setor_predominante": "Informação e Comunicação",
+    "total_movimentacoes": 4514
+  },
+  {
+    "cbo": "951105",
+    "setor_predominante": "Indústrias de Transformação",
+    "total_movimentacoes": 4509
+  },
+  {
+    "cbo": "782305",
+    "setor_predominante": "Atividades Administrativas",
+    "total_movimentacoes": 4493
+  },
+  {
+    "cbo": "763105",
+    "setor_predominante": "Indústrias de Transformação",
+    "total_movimentacoes": 4477
+  },
+  {
+    "cbo": "848310",
+    "setor_predominante": "Comércio e Reparação de Veículos",
+    "total_movimentacoes": 4454
+  },
+  {
+    "cbo": "519110",
+    "setor_predominante": "Comércio e Reparação de Veículos",
+    "total_movimentacoes": 4364
+  },
+  {
+    "cbo": "142305",
+    "setor_predominante": "Comércio e Reparação de Veículos",
+    "total_movimentacoes": 4363
+  },
+  {
+    "cbo": "813125",
+    "setor_predominante": "Indústrias de Transformação",
+    "total_movimentacoes": 4292
+  },
+  {
+    "cbo": "632125",
+    "setor_predominante": "Agropecuária, Florestal e Pesca",
+    "total_movimentacoes": 4176
+  },
+  {
+    "cbo": "821450",
+    "setor_predominante": "Indústrias de Transformação",
+    "total_movimentacoes": 4084
+  },
+  {
+    "cbo": "623310",
+    "setor_predominante": "Agropecuária, Florestal e Pesca",
+    "total_movimentacoes": 4066
+  },
+  {
+    "cbo": "354145",
+    "setor_predominante": "Comércio e Reparação de Veículos",
+    "total_movimentacoes": 4052
+  },
+  {
+    "cbo": "715125",
+    "setor_predominante": "Construção",
+    "total_movimentacoes": 3983
+  },
+  {
+    "cbo": "252305",
+    "setor_predominante": "Saúde Humana e Serviços Sociais",
+    "total_movimentacoes": 3965
+  },
+  {
+    "cbo": "731120",
+    "setor_predominante": "Indústrias de Transformação",
+    "total_movimentacoes": 3955
+  },
+  {
+    "cbo": "513420",
+    "setor_predominante": "Alojamento e Alimentação",
+    "total_movimentacoes": 3948
+  },
+  {
+    "cbo": "224120",
+    "setor_predominante": "Artes, Cultura, Esporte e Recreação",
+    "total_movimentacoes": 3914
+  },
+  {
+    "cbo": "725105",
+    "setor_predominante": "Indústrias de Transformação",
+    "total_movimentacoes": 3814
+  },
+  {
+    "cbo": "354205",
+    "setor_predominante": "Indústrias de Transformação",
+    "total_movimentacoes": 3799
+  },
+  {
+    "cbo": "761330",
+    "setor_predominante": "Indústrias de Transformação",
+    "total_movimentacoes": 3761
+  },
+  {
+    "cbo": "422315",
+    "setor_predominante": "Atividades Administrativas",
+    "total_movimentacoes": 3747
+  },
+  {
+    "cbo": "914425",
+    "setor_predominante": "Comércio e Reparação de Veículos",
+    "total_movimentacoes": 3626
+  },
+  {
+    "cbo": "715115",
+    "setor_predominante": "Construção",
+    "total_movimentacoes": 3601
+  },
+  {
+    "cbo": "622010",
+    "setor_predominante": "Atividades Administrativas",
+    "total_movimentacoes": 3597
+  },
+  {
+    "cbo": "413115",
+    "setor_predominante": "Comércio e Reparação de Veículos",
+    "total_movimentacoes": 3576
+  },
+  {
+    "cbo": "322415",
+    "setor_predominante": "Saúde Humana e Serviços Sociais",
+    "total_movimentacoes": 3557
+  },
+  {
+    "cbo": "524105",
+    "setor_predominante": "Comércio e Reparação de Veículos",
+    "total_movimentacoes": 3539
+  },
+  {
+    "cbo": "331105",
+    "setor_predominante": "Educação",
+    "total_movimentacoes": 3472
+  },
+  {
+    "cbo": "422305",
+    "setor_predominante": "Atividades Administrativas",
+    "total_movimentacoes": 3452
+  },
+  {
+    "cbo": "515215",
+    "setor_predominante": "Saúde Humana e Serviços Sociais",
+    "total_movimentacoes": 3446
+  },
+  {
+    "cbo": "516345",
+    "setor_predominante": "Outras Atividades de Serviços",
+    "total_movimentacoes": 3420
+  },
+  {
+    "cbo": "414120",
+    "setor_predominante": "Comércio e Reparação de Veículos",
+    "total_movimentacoes": 3402
+  },
+  {
+    "cbo": "142320",
+    "setor_predominante": "Comércio e Reparação de Veículos",
+    "total_movimentacoes": 3397
+  },
+  {
+    "cbo": "772105",
+    "setor_predominante": "Indústrias de Transformação",
+    "total_movimentacoes": 3301
+  },
+  {
+    "cbo": "411030",
+    "setor_predominante": "Atividades Profissionais e Técnicas",
+    "total_movimentacoes": 3295
+  },
+  {
+    "cbo": "782405",
+    "setor_predominante": "Transporte, Armazenagem e Correio",
+    "total_movimentacoes": 3235
+  },
+  {
+    "cbo": "342125",
+    "setor_predominante": "Transporte, Armazenagem e Correio",
+    "total_movimentacoes": 3228
+  },
+  {
+    "cbo": "391125",
+    "setor_predominante": "Indústrias de Transformação",
+    "total_movimentacoes": 3201
+  },
+  {
+    "cbo": "841484",
+    "setor_predominante": "Indústrias de Transformação",
+    "total_movimentacoes": 3173
+  },
+  {
+    "cbo": "954125",
+    "setor_predominante": "Indústrias de Transformação",
+    "total_movimentacoes": 3139
+  },
+  {
+    "cbo": "371410",
+    "setor_predominante": "Artes, Cultura, Esporte e Recreação",
+    "total_movimentacoes": 3121
+  },
+  {
+    "cbo": "724410",
+    "setor_predominante": "Indústrias de Transformação",
+    "total_movimentacoes": 3119
+  },
+  {
+    "cbo": "141205",
+    "setor_predominante": "Indústrias de Transformação",
+    "total_movimentacoes": 3073
+  },
+  {
+    "cbo": "763110",
+    "setor_predominante": "Indústrias de Transformação",
+    "total_movimentacoes": 2956
+  },
+  {
+    "cbo": "761410",
+    "setor_predominante": "Indústrias de Transformação",
+    "total_movimentacoes": 2947
+  },
+  {
+    "cbo": "391210",
+    "setor_predominante": "Indústrias de Transformação",
+    "total_movimentacoes": 2945
+  },
+  {
+    "cbo": "722215",
+    "setor_predominante": "Indústrias de Transformação",
+    "total_movimentacoes": 2863
+  },
+  {
+    "cbo": "773325",
+    "setor_predominante": "Indústrias de Transformação",
+    "total_movimentacoes": 2841
+  },
+  {
+    "cbo": "354130",
+    "setor_predominante": "Atividades Financeiras e Seguros",
+    "total_movimentacoes": 2820
+  },
+  {
+    "cbo": "716405",
+    "setor_predominante": "Construção",
+    "total_movimentacoes": 2779
+  },
+  {
+    "cbo": "391215",
+    "setor_predominante": "Indústrias de Transformação",
+    "total_movimentacoes": 2778
+  },
+  {
+    "cbo": "331205",
+    "setor_predominante": "Administração Pública e Seguridade",
+    "total_movimentacoes": 2764
+  },
+  {
+    "cbo": "992115",
+    "setor_predominante": "Comércio e Reparação de Veículos",
+    "total_movimentacoes": 2757
+  },
+  {
+    "cbo": "752305",
+    "setor_predominante": "Indústrias de Transformação",
+    "total_movimentacoes": 2757
+  },
+  {
+    "cbo": "351505",
+    "setor_predominante": "Atividades Administrativas",
+    "total_movimentacoes": 2752
+  },
+  {
+    "cbo": "231110",
+    "setor_predominante": "Educação",
+    "total_movimentacoes": 2748
+  },
+  {
+    "cbo": "731135",
+    "setor_predominante": "Indústrias de Transformação",
+    "total_movimentacoes": 2684
+  },
+  {
+    "cbo": "513610",
+    "setor_predominante": "Alojamento e Alimentação",
+    "total_movimentacoes": 2677
+  },
+  {
+    "cbo": "721405",
+    "setor_predominante": "Indústrias de Transformação",
+    "total_movimentacoes": 2664
+  },
+  {
+    "cbo": "761309",
+    "setor_predominante": "Indústrias de Transformação",
+    "total_movimentacoes": 2658
+  },
+  {
+    "cbo": "992225",
+    "setor_predominante": "Construção",
+    "total_movimentacoes": 2650
+  },
+  {
+    "cbo": "723315",
+    "setor_predominante": "Indústrias de Transformação",
+    "total_movimentacoes": 2638
+  },
+  {
+    "cbo": "841505",
+    "setor_predominante": "Indústrias de Transformação",
+    "total_movimentacoes": 2600
+  },
+  {
+    "cbo": "782515",
+    "setor_predominante": "Transporte, Armazenagem e Correio",
+    "total_movimentacoes": 2577
+  },
+  {
+    "cbo": "413205",
+    "setor_predominante": "Atividades Financeiras e Seguros",
+    "total_movimentacoes": 2575
+  },
+  {
+    "cbo": "312105",
+    "setor_predominante": "Construção",
+    "total_movimentacoes": 2574
+  },
+  {
+    "cbo": "715230",
+    "setor_predominante": "Construção",
+    "total_movimentacoes": 2555
+  },
+  {
+    "cbo": "723330",
+    "setor_predominante": "Indústrias de Transformação",
+    "total_movimentacoes": 2545
+  },
+  {
+    "cbo": "262410",
+    "setor_predominante": "Indústrias de Transformação",
+    "total_movimentacoes": 2519
+  },
+  {
+    "cbo": "732130",
+    "setor_predominante": "Informação e Comunicação",
+    "total_movimentacoes": 2499
+  },
+  {
+    "cbo": "766305",
+    "setor_predominante": "Atividades Administrativas",
+    "total_movimentacoes": 2490
+  },
+  {
+    "cbo": "252545",
+    "setor_predominante": "Comércio e Reparação de Veículos",
+    "total_movimentacoes": 2489
+  },
+  {
+    "cbo": "234520",
+    "setor_predominante": "Educação",
+    "total_movimentacoes": 2489
+  },
+  {
+    "cbo": "784110",
+    "setor_predominante": "Indústrias de Transformação",
+    "total_movimentacoes": 2470
+  },
+  {
+    "cbo": "333105",
+    "setor_predominante": "Educação",
+    "total_movimentacoes": 2460
+  },
+  {
+    "cbo": "911205",
+    "setor_predominante": "Construção",
+    "total_movimentacoes": 2460
+  },
+  {
+    "cbo": "716305",
+    "setor_predominante": "Comércio e Reparação de Veículos",
+    "total_movimentacoes": 2450
+  },
+  {
+    "cbo": "313220",
+    "setor_predominante": "Comércio e Reparação de Veículos",
+    "total_movimentacoes": 2446
+  },
+  {
+    "cbo": "141510",
+    "setor_predominante": "Alojamento e Alimentação",
+    "total_movimentacoes": 2440
+  },
+  {
+    "cbo": "354305",
+    "setor_predominante": "Transporte, Armazenagem e Correio",
+    "total_movimentacoes": 2415
+  },
+  {
+    "cbo": "514110",
+    "setor_predominante": "Transporte, Armazenagem e Correio",
+    "total_movimentacoes": 2410
+  },
+  {
+    "cbo": "411025",
+    "setor_predominante": "Atividades Profissionais e Técnicas",
+    "total_movimentacoes": 2386
+  },
+  {
+    "cbo": "764005",
+    "setor_predominante": "Indústrias de Transformação",
+    "total_movimentacoes": 2368
+  },
+  {
+    "cbo": "253215",
+    "setor_predominante": "Atividades Financeiras e Seguros",
+    "total_movimentacoes": 2366
+  },
+  {
+    "cbo": "334105",
+    "setor_predominante": "Educação",
+    "total_movimentacoes": 2357
+  },
+  {
+    "cbo": "761327",
+    "setor_predominante": "Indústrias de Transformação",
+    "total_movimentacoes": 2326
+  },
+  {
+    "cbo": "716510",
+    "setor_predominante": "Construção",
+    "total_movimentacoes": 2319
+  },
+  {
+    "cbo": "351405",
+    "setor_predominante": "Atividades Profissionais e Técnicas",
+    "total_movimentacoes": 2296
+  },
+  {
+    "cbo": "641015",
+    "setor_predominante": "Agropecuária, Florestal e Pesca",
+    "total_movimentacoes": 2280
+  },
+  {
+    "cbo": "811775",
+    "setor_predominante": "Indústrias de Transformação",
+    "total_movimentacoes": 2225
+  },
+  {
+    "cbo": "231105",
+    "setor_predominante": "Educação",
+    "total_movimentacoes": 2194
+  },
+  {
+    "cbo": "763010",
+    "setor_predominante": "Indústrias de Transformação",
+    "total_movimentacoes": 2134
+  },
+  {
+    "cbo": "354140",
+    "setor_predominante": "Comércio e Reparação de Veículos",
+    "total_movimentacoes": 2121
+  },
+  {
+    "cbo": "513615",
+    "setor_predominante": "Alojamento e Alimentação",
+    "total_movimentacoes": 2086
+  },
+  {
+    "cbo": "763320",
+    "setor_predominante": "Indústrias de Transformação",
+    "total_movimentacoes": 2068
+  },
+  {
+    "cbo": "514215",
+    "setor_predominante": "Atividades Administrativas",
+    "total_movimentacoes": 2045
+  },
+  {
+    "cbo": "223710",
+    "setor_predominante": "Alojamento e Alimentação",
+    "total_movimentacoes": 2024
+  },
+  {
+    "cbo": "722205",
+    "setor_predominante": "Indústrias de Transformação",
+    "total_movimentacoes": 2013
+  },
+  {
+    "cbo": "313215",
+    "setor_predominante": "Comércio e Reparação de Veículos",
+    "total_movimentacoes": 1986
+  },
+  {
+    "cbo": "725010",
+    "setor_predominante": "Indústrias de Transformação",
+    "total_movimentacoes": 1947
+  },
+  {
+    "cbo": "513440",
+    "setor_predominante": "Alojamento e Alimentação",
+    "total_movimentacoes": 1943
+  },
+  {
+    "cbo": "252715",
+    "setor_predominante": "Transporte, Armazenagem e Correio",
+    "total_movimentacoes": 1921
+  },
+  {
+    "cbo": "422205",
+    "setor_predominante": "Atividades Administrativas",
+    "total_movimentacoes": 1911
+  },
+  {
+    "cbo": "313310",
+    "setor_predominante": "Informação e Comunicação",
+    "total_movimentacoes": 1909
+  },
+  {
+    "cbo": "724220",
+    "setor_predominante": "Indústrias de Transformação",
+    "total_movimentacoes": 1902
+  },
+  {
+    "cbo": "721210",
+    "setor_predominante": "Indústrias de Transformação",
+    "total_movimentacoes": 1837
+  },
+  {
+    "cbo": "314110",
+    "setor_predominante": "Indústrias de Transformação",
+    "total_movimentacoes": 1828
+  },
+  {
+    "cbo": "317205",
+    "setor_predominante": "Atividades Administrativas",
+    "total_movimentacoes": 1812
+  },
+  {
+    "cbo": "766315",
+    "setor_predominante": "Indústrias de Transformação",
+    "total_movimentacoes": 1811
+  },
+  {
+    "cbo": "623305",
+    "setor_predominante": "Agropecuária, Florestal e Pesca",
+    "total_movimentacoes": 1796
+  },
+  {
+    "cbo": "271105",
+    "setor_predominante": "Alojamento e Alimentação",
+    "total_movimentacoes": 1790
+  },
+  {
+    "cbo": "411045",
+    "setor_predominante": "Transporte, Armazenagem e Correio",
+    "total_movimentacoes": 1788
+  },
+  {
+    "cbo": "253405",
+    "setor_predominante": "Comércio e Reparação de Veículos",
+    "total_movimentacoes": 1775
+  },
+  {
+    "cbo": "515305",
+    "setor_predominante": "Outras Atividades de Serviços",
+    "total_movimentacoes": 1770
+  },
+  {
+    "cbo": "724510",
+    "setor_predominante": "Indústrias de Transformação",
+    "total_movimentacoes": 1725
+  },
+  {
+    "cbo": "842120",
+    "setor_predominante": "Indústrias de Transformação",
+    "total_movimentacoes": 1725
+  },
+  {
+    "cbo": "519210",
+    "setor_predominante": "Água, Esgoto e Resíduos",
+    "total_movimentacoes": 1712
+  },
+  {
+    "cbo": "372205",
+    "setor_predominante": "Informação e Comunicação",
+    "total_movimentacoes": 1711
+  },
+  {
+    "cbo": "715610",
+    "setor_predominante": "Construção",
+    "total_movimentacoes": 1711
+  },
+  {
+    "cbo": "413105",
+    "setor_predominante": "Atividades Profissionais e Técnicas",
+    "total_movimentacoes": 1703
+  },
+  {
+    "cbo": "513415",
+    "setor_predominante": "Alojamento e Alimentação",
+    "total_movimentacoes": 1699
+  },
+  {
+    "cbo": "848505",
+    "setor_predominante": "Indústrias de Transformação",
+    "total_movimentacoes": 1696
+  },
+  {
+    "cbo": "513430",
+    "setor_predominante": "Saúde Humana e Serviços Sociais",
+    "total_movimentacoes": 1689
+  },
+  {
+    "cbo": "841408",
+    "setor_predominante": "Alojamento e Alimentação",
+    "total_movimentacoes": 1677
+  },
+  {
+    "cbo": "354135",
+    "setor_predominante": "Comércio e Reparação de Veículos",
+    "total_movimentacoes": 1641
+  },
+  {
+    "cbo": "223605",
+    "setor_predominante": "Saúde Humana e Serviços Sociais",
+    "total_movimentacoes": 1639
+  },
+  {
+    "cbo": "333110",
+    "setor_predominante": "Educação",
+    "total_movimentacoes": 1638
+  },
+  {
+    "cbo": "763310",
+    "setor_predominante": "Indústrias de Transformação",
+    "total_movimentacoes": 1638
+  },
+  {
+    "cbo": "412205",
+    "setor_predominante": "Atividades Administrativas",
+    "total_movimentacoes": 1633
+  },
+  {
+    "cbo": "377110",
+    "setor_predominante": "Artes, Cultura, Esporte e Recreação",
+    "total_movimentacoes": 1630
+  },
+  {
+    "cbo": "253225",
+    "setor_predominante": "Atividades Financeiras e Seguros",
+    "total_movimentacoes": 1622
+  },
+  {
+    "cbo": "233210",
+    "setor_predominante": "Educação",
+    "total_movimentacoes": 1616
+  },
+  {
+    "cbo": "823325",
+    "setor_predominante": "Indústrias de Transformação",
+    "total_movimentacoes": 1609
+  },
+  {
+    "cbo": "391115",
+    "setor_predominante": "Transporte, Armazenagem e Correio",
+    "total_movimentacoes": 1596
+  },
+  {
+    "cbo": "519315",
+    "setor_predominante": "Outras Atividades de Serviços",
+    "total_movimentacoes": 1594
+  },
+  {
+    "cbo": "412110",
+    "setor_predominante": "Atividades Administrativas",
+    "total_movimentacoes": 1582
+  },
+  {
+    "cbo": "313105",
+    "setor_predominante": "Indústrias de Transformação",
+    "total_movimentacoes": 1570
+  },
+  {
+    "cbo": "725505",
+    "setor_predominante": "Indústrias de Transformação",
+    "total_movimentacoes": 1552
+  },
+  {
+    "cbo": "351430",
+    "setor_predominante": "Atividades Profissionais e Técnicas",
+    "total_movimentacoes": 1545
+  },
+  {
+    "cbo": "513215",
+    "setor_predominante": "Alojamento e Alimentação",
+    "total_movimentacoes": 1531
+  },
+  {
+    "cbo": "716525",
+    "setor_predominante": "Indústrias de Transformação",
+    "total_movimentacoes": 1516
+  },
+  {
+    "cbo": "519925",
+    "setor_predominante": "Transporte, Armazenagem e Correio",
+    "total_movimentacoes": 1495
+  },
+  {
+    "cbo": "515210",
+    "setor_predominante": "Comércio e Reparação de Veículos",
+    "total_movimentacoes": 1477
+  },
+  {
+    "cbo": "732120",
+    "setor_predominante": "Construção",
+    "total_movimentacoes": 1457
+  }
+]
