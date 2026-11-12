@@ -86,7 +86,8 @@ mapa_secoes = {
     'O': 'Administração Pública', 'P': 'Educação',
     'Q': 'Saúde e Serviços Sociais', 'R': 'Artes, Cultura e Esporte',
     'S': 'Outras Atividades de Serviços', 'T': 'Serviços Domésticos',
-    'U': 'Organismos Internacionais'
+   'U': 'Organismos Internacionais',
+    'Z': 'Não Identificado'
 }
 df_completo['seção'] = df_completo['seção'].astype(str).str.strip().str.upper()
 df_completo['nome_setor'] = df_completo['seção'].map(mapa_secoes).fillna(df_completo['seção'])

@@ -11,7 +11,9 @@ st.set_page_config(
 
 @st.cache_data
 def carregar_dados():
-    return pd.read_csv('Base_Dashboard_Otimizada.csv.gz', sep=';', compression='gzip')
+    df = pd.read_csv('Base_Dashboard_Otimizada.csv.gz', sep=';', compression='gzip')
+    df['nome_setor'] = df['nome_setor'].replace({'Z': 'Não Identificado'})
+    return df
 
 try:
     df = carregar_dados()
