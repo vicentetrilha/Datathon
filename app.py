@@ -249,7 +249,7 @@ with aba1:
 
         fig_tempo.add_hline(y=0, line_dash="dash", line_color="gray", opacity=0.6)
         st.plotly_chart(fig_tempo, width='stretch')
-        
+
 # --- EIXO 2: PERFIL SOCIOECONÔMICO ---
 with aba2:
     st.subheader("Diagnóstico de Atratividade: Salário Médio vs. Rotatividade (Turnover)")
@@ -304,61 +304,115 @@ with aba2:
         hide_index=True
     )
 
-# --- EIXO 3: QUALIFICAÇÃO E GARGALOS (IA / CBO) ---
+# --- EIXO 3: QUALIFICAÇÃO E GARGALOS (IA / CBO 2002) ---
 with aba3:
-    c_q1, c_q2 = st.columns([1, 1.3])
-    with c_q1:
-        st.subheader("Gargalo por Nível de Qualificação")
-        df_qual = df_filtrado.groupby('nivel_qualificacao', as_index=False).agg(
+    c1, c2 = st.columns([3, 2])
+
+    with c1:
+        st.subheader("Saldo Líquido por Macrofamília de Ocupação (IA)")
+        df_macro = df_filtrado.groupby(['macrofamilia', 'nivel_qualificacao'], as_index=False).agg(
             admissoes=('admissoes', 'sum'),
-            demissoes=('demissoes', 'sum'),
-            soma_sal=('soma_sal_total', 'sum'),
-            qtd_sal=('qtd_sal_total', 'sum')
+            demissoes=('demissoes', 'sum')
         )
-        df_qual['salario_medio'] = np.where(df_qual['qtd_sal'] > 0, df_qual['soma_sal'] / df_qual['qtd_sal'], 0)
-        df_qual['saldo_vagas'] = df_qual['admissoes'] - df_qual['demissoes']
-        df_qual['turnover'] = (df_qual['demissoes'] / df_qual['admissoes'].replace(0, 1)) * 100
+        df_macro['saldo_vagas'] = df_macro['admissoes'] - df_macro['demissoes']
+        df_macro = df_macro.sort_values('saldo_vagas', ascending=True)
 
-        fig_qual = px.bar(
-            df_qual,
-            x='nivel_qualificacao',
-            y='saldo_vagas',
-            color='nivel_qualificacao',
-            text_auto=True,
-            labels={'nivel_qualificacao': 'Nível de Qualificação', 'saldo_vagas': 'Saldo Líquido'}
-        )
-        fig_qual.update_layout(showlegend=False)
-        st.plotly_chart(fig_qual, width='stretch')
-
-        st.dataframe(
-            df_qual[['nivel_qualificacao', 'saldo_vagas', 'salario_medio', 'turnover']].style.format({
-                'saldo_vagas': '{:+,}',
-                'salario_medio': 'R$ {:,.2f}',
-                'turnover': '{:.1f}%'
-            }),
-            width='stretch',
-            hide_index=True
-        )
-
-    with c_q2:
-        st.subheader("Impacto por Macrofamília de Cargos (IA)")
-        df_mac = df_filtrado.groupby('macrofamilia', as_index=False).agg(
-            admissoes=('admissoes', 'sum'),
-            demissoes=('demissoes', 'sum'),
-            soma_sal=('soma_sal_total', 'sum'),
-            qtd_sal=('qtd_sal_total', 'sum')
-        )
-        df_mac['salario_medio'] = np.where(df_mac['qtd_sal'] > 0, df_mac['soma_sal'] / df_mac['qtd_sal'], 0)
-        df_mac['saldo_vagas'] = df_mac['admissoes'] - df_mac['demissoes']
-        df_mac = df_mac.sort_values('saldo_vagas', ascending=True)
-
-        fig_mac = px.bar(
-            df_mac,
+        fig_macro = px.bar(
+            df_macro,
             x='saldo_vagas',
             y='macrofamilia',
+            color='nivel_qualificacao',
             orientation='h',
-            color='salario_medio',
-            color_continuous_scale='Viridis',
-            labels={'saldo_vagas': 'Saldo Líquido', 'macrofamilia': 'Macrofamília CBO', 'salario_medio': 'Salário Médio (R$)'}
+            labels={
+                'saldo_vagas': 'Saldo Líquido de Vagas',
+                'macrofamilia': 'Macrofamília (CBO 2002)',
+                'nivel_qualificacao': 'Nível de Qualificação'
+            }
         )
-        st.plotly_chart(fig_mac, width='stretch')
+        fig_macro.add_vline(x=0, line_dash="dash", line_color="gray", opacity=0.6)
+        st.plotly_chart(fig_macro, width='stretch')
+
+    with c2:
+        st.subheader("Balanço por Nível de Qualificação")
+        df_niv = df_filtrado.groupby('nivel_qualificacao', as_index=False).agg(
+            Admissões=('admissoes', 'sum'),
+            Demissões=('demissoes', 'sum')
+        )
+        df_niv['Saldo Líquido'] = df_niv['Admissões'] - df_niv['Demissões']
+        df_niv = df_niv.sort_values('Saldo Líquido', ascending=False)
+
+        fig_niv = px.bar(
+            df_niv,
+            x='nivel_qualificacao',
+            y=['Admissões', 'Demissões', 'Saldo Líquido'],
+            barmode='group',
+            color_discrete_map={
+                'Admissões': '#1f77b4',
+                'Demissões': '#d62728',
+                'Saldo Líquido': '#2ca02c'
+            },
+            labels={
+                'nivel_qualificacao': 'Nível de Qualificação',
+                'value': 'Quantidade de Vínculos',
+                'variable': 'Indicador'
+            }
+        )
+        st.plotly_chart(fig_niv, width='stretch')
+
+    st.divider()
+    st.subheader("Diagnóstico Executivo e Recomendações Práticas (IA / CBO 2002)")
+
+    df_rec = df_filtrado.groupby(['macrofamilia', 'nivel_qualificacao'], as_index=False).agg(
+        admissoes=('admissoes', 'sum'),
+        demissoes=('demissoes', 'sum'),
+        soma_sal=('soma_sal_adm', 'sum'),
+        qtd_sal=('qtd_sal_adm', 'sum')
+    )
+    df_rec['saldo'] = df_rec['admissoes'] - df_rec['demissoes']
+    df_rec['turnover'] = (df_rec['demissoes'] / df_rec['admissoes'].replace(0, float('nan'))) * 100
+    df_rec['salario_medio'] = df_rec['soma_sal'] / df_rec['qtd_sal'].replace(0, float('nan'))
+
+    if not df_rec.empty and df_rec['admissoes'].sum() > 0:
+        # 1. Macrofamília com maior geração líquida de vagas
+        top_demanda = df_rec.sort_values('saldo', ascending=False).iloc[0]
+
+        # 2. Macrofamília com maior rotatividade (entre as que têm volume relevante)
+        corte_vol = df_rec['admissoes'].median()
+        df_vol = df_rec[df_rec['admissoes'] >= corte_vol]
+        top_turn = df_vol.sort_values('turnover', ascending=False).iloc[0] if not df_vol.empty else top_demanda
+
+        # 3. Nível de qualificação predominante no saldo positivo
+        df_nivel = df_rec[df_rec['saldo'] > 0].groupby('nivel_qualificacao', as_index=False)['saldo'].sum()
+        top_nivel = (
+            df_nivel.sort_values('saldo', ascending=False).iloc[0]['nivel_qualificacao']
+            if not df_nivel.empty else "Operacional / Base"
+        )
+
+        with st.container(border=True):
+            col_r1, col_r2, col_r3 = st.columns(3)
+
+            with col_r1:
+                st.markdown("#### Gargalo de Expansão")
+                st.success(
+                    f"**Foco:** {top_demanda['macrofamilia']} ({top_demanda['nivel_qualificacao']})\n\n"
+                    f"**Evidência:** Saldo líquido de **{int(top_demanda['saldo']):+,}** vagas no recorte.\n\n"
+                    f"**Ação:** Priorizar trilhas rápidas de qualificação técnica (SENAI) e parcerias locais para suprir a demanda."
+                )
+
+            with col_r2:
+                st.markdown("#### Alerta de Rotatividade")
+                sal_txt = f"R$ {top_turn['salario_medio']:,.2f}" if pd.notna(top_turn['salario_medio']) else "N/D"
+                turn_txt = f"{top_turn['turnover']:.1f}%" if pd.notna(top_turn['turnover']) else "N/D"
+                st.warning(
+                    f"**Foco:** {top_turn['macrofamilia']}\n\n"
+                    f"**Evidência:** Turnover de **{turn_txt}** com salário médio de admissão de **{sal_txt}**.\n\n"
+                    f"**Ação:** Revisar atratividade salarial, benefícios e integração (*onboarding*) nos primeiros 90 dias."
+                )
+
+            with col_r3:
+                st.markdown("#### Estratégia de Formação")
+                st.info(
+                    f"**Nível Predominante:** {top_nivel}\n\n"
+                    f"**Evidência:** Concentra a maior parcela da geração líquida de empregos ativos no filtro.\n\n"
+                    f"**Ação:** Direcionar vagas de aprendizagem industrial e programas de requalificação para esse perfil."
+                )
