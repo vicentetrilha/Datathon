@@ -10,12 +10,12 @@ Solução analítica desenvolvida para diagnosticar sinais de **apagão de mão 
 
 O painel conta com **4 KPIs estratégicos** no topo (Saldo Líquido, Saldo por 10 mil Habitantes, Salário Médio de Admissão e Índice de Rotatividade) e **3 abas de investigação**:
 
-1. **Territorial e Setorial:** Ranking proporcional dos 15 municípios com maior geração líquida de vagas por porte populacional, balanço de expansão vs. encolhimento por setor econômico (CNAE) e curva mensal de movimentações.
+1. **Territorial e Setorial:** Ranking proporcional dos municípios com linha de referência (média do recorte), **modo comparativo entre municípios** (lado a lado por setor e na linha do tempo), balanço de expansão vs. encolhimento por setor econômico (CNAE) e curva mensal de movimentações.
 2. **Perfil Socioeconômico:** Matriz de atratividade cruzando **Salário Médio** e **Índice de Rotatividade (Turnover)** por setor para identificar gargalos de retenção, além do comparativo por grau de instrução.
 3. **Qualificação e Gargalos (IA / CBO 2002):** Classificação das ocupações em **11 macrofamílias de cargos** e **3 níveis de qualificação** (*Alta Qualificação*, *Técnico/Especializado* e *Operacional/Base*).
 
 ### Premissas e Limites da Análise
-* **Janela Temporal (Projeção de Sazonalidade):** A base disponibilizada contempla os últimos 12 meses de movimentações. Portanto, a curva mensal apresentada no painel funciona como um **indicativo/projeção de comportamento sazonal**; a confirmação estatística de ciclos recorrentes exigiria séries históricas de anos anteriores.
+* **Janela Temporal (Projeção de Sazonalidade):** A base disponibilizada contempla os últimos 12 meses de movimentações. Portanto, a curva mensal apresentada no painel funciona como um **indicativo/projeção de comportamento sazonal** (oscilações intranuais); a confirmação estatística de ciclos recorrentes exigiria séries históricas de anos anteriores.
 * **Tratamento de Setores (CNAE):** Registros originalmente classificados sob o código `'Z'` no layout do Novo CAGED foram padronizados como **`Não Identificado`** para maior clareza na leitura executiva.
 
 ### Fórmulas Principais
