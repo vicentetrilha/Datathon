@@ -100,17 +100,33 @@ aba1, aba2, aba3 = st.tabs([
 
 # --- EIXO 1: TERRITORIAL E SETORIAL ---
 with aba1:
+    qtd_mun = df_filtrado['nome_municipio'].nunique()
+    comparar_cidades = st.toggle(
+        "Modo Comparativo entre Municípios (separa setores e curvas mensais por cidade)",
+        value=(1 < qtd_mun <= 6),
+        help="Quando ativado, exibe barras agrupadas por município no gráfico de setores e linhas individuais na evolução mensal."
+    )
+
     c1, c2 = st.columns(2)
     with c1:
-        st.subheader("Top 15 Municípios — Saldo por 10k Habitantes")
         df_mun = df_filtrado.groupby(['municipio_codigo', 'nome_municipio', 'populacao'], as_index=False).agg(
             admissoes=('admissoes', 'sum'),
             demissoes=('demissoes', 'sum')
         )
         df_mun['saldo_vagas'] = df_mun['admissoes'] - df_mun['demissoes']
         df_mun['saldo_10k'] = (df_mun['saldo_vagas'] / df_mun['populacao']) * 10000
-        top_mun = df_mun.sort_values('saldo_10k', ascending=False).head(15)
 
+        if qtd_mun == 1:
+            titulo_mun = f"Saldo por 10k Habitantes — {df_mun['nome_municipio'].iloc[0]}"
+            top_mun = df_mun
+        elif qtd_mun <= 15:
+            titulo_mun = f"Comparativo ({qtd_mun} Municípios) — Saldo por 10k Hab"
+            top_mun = df_mun.sort_values('saldo_10k', ascending=False)
+        else:
+            titulo_mun = "Top 15 Municípios — Saldo por 10k Habitantes"
+            top_mun = df_mun.sort_values('saldo_10k', ascending=False).head(15)
+
+        st.subheader(titulo_mun)
         fig_mun = px.bar(
             top_mun.sort_values('saldo_10k', ascending=True),
             x='saldo_10k',
@@ -120,27 +136,58 @@ with aba1:
             color_continuous_scale='Blues',
             labels={'saldo_10k': 'Saldo / 10k Hab', 'nome_municipio': 'Município', 'saldo_vagas': 'Saldo Absoluto'}
         )
+        if qtd_mun > 1:
+            media_10k = df_mun['saldo_10k'].mean()
+            fig_mun.add_vline(
+                x=media_10k,
+                line_dash="dash",
+                line_color="#ff7f0e",
+                annotation_text=f"Média: {media_10k:.1f}",
+                annotation_position="top right"
+            )
         st.plotly_chart(fig_mun, width='stretch')
 
     with c2:
-        st.subheader("Expansão vs. Encolhimento por Setor (CNAE)")
-        df_set = df_filtrado.groupby('nome_setor', as_index=False).agg(
-            admissoes=('admissoes', 'sum'),
-            demissoes=('demissoes', 'sum')
-        )
-        df_set['saldo_vagas'] = df_set['admissoes'] - df_set['demissoes']
-        df_set['status'] = df_set['saldo_vagas'].apply(lambda x: 'Expansão' if x >= 0 else 'Encolhimento')
-        df_set = df_set.sort_values('saldo_vagas', ascending=True)
+        if comparar_cidades:
+            st.subheader("Comparativo Setorial por Município (Saldo Líquido)")
+            cidades_comp = (
+                df_mun.sort_values('saldo_vagas', ascending=False).head(5)['nome_municipio'].tolist()
+                if qtd_mun > 6 else df_mun['nome_municipio'].tolist()
+            )
+            df_set = df_filtrado[df_filtrado['nome_municipio'].isin(cidades_comp)].groupby(
+                ['nome_setor', 'nome_municipio'], as_index=False
+            ).agg(admissoes=('admissoes', 'sum'), demissoes=('demissoes', 'sum'))
+            df_set['saldo_vagas'] = df_set['admissoes'] - df_set['demissoes']
+            df_set = df_set.sort_values('saldo_vagas', ascending=True)
 
-        fig_set = px.bar(
-            df_set,
-            x='saldo_vagas',
-            y='nome_setor',
-            orientation='h',
-            color='status',
-            color_discrete_map={'Expansão': '#1f77b4', 'Encolhimento': '#d62728'},
-            labels={'saldo_vagas': 'Saldo Líquido de Vagas', 'nome_setor': 'Setor Econômico'}
-        )
+            fig_set = px.bar(
+                df_set,
+                x='saldo_vagas',
+                y='nome_setor',
+                color='nome_municipio',
+                barmode='group',
+                orientation='h',
+                labels={'saldo_vagas': 'Saldo Líquido', 'nome_setor': 'Setor Econômico', 'nome_municipio': 'Município'}
+            )
+        else:
+            st.subheader("Expansão vs. Encolhimento por Setor (CNAE)")
+            df_set = df_filtrado.groupby('nome_setor', as_index=False).agg(
+                admissoes=('admissoes', 'sum'),
+                demissoes=('demissoes', 'sum')
+            )
+            df_set['saldo_vagas'] = df_set['admissoes'] - df_set['demissoes']
+            df_set['status'] = df_set['saldo_vagas'].apply(lambda x: 'Expansão' if x >= 0 else 'Encolhimento')
+            df_set = df_set.sort_values('saldo_vagas', ascending=True)
+
+            fig_set = px.bar(
+                df_set,
+                x='saldo_vagas',
+                y='nome_setor',
+                orientation='h',
+                color='status',
+                color_discrete_map={'Expansão': '#1f77b4', 'Encolhimento': '#d62728'},
+                labels={'saldo_vagas': 'Saldo Líquido de Vagas', 'nome_setor': 'Setor Econômico'}
+            )
         st.plotly_chart(fig_set, width='stretch')
 
     st.divider()
@@ -153,32 +200,56 @@ with aba1:
             "Para validar estatisticamente um padrão sazonal recorrente, seria necessária a incorporação de séries históricas de anos anteriores."
         )
 
-        df_tempo = df_filtrado.dropna(subset=['competênciamov']).groupby('competênciamov', as_index=False).agg(
-            Admissões=('admissoes', 'sum'),
-            Demissões=('demissoes', 'sum')
-        )
-        df_tempo['Saldo Líquido'] = df_tempo['Admissões'] - df_tempo['Demissões']
-        comp_str = df_tempo['competênciamov'].astype(str).str.replace(r'\.0$', '', regex=True)
-        df_tempo['Competência'] = pd.to_datetime(comp_str, format='%Y%m').dt.strftime('%Y-%m')
-        df_tempo = df_tempo.sort_values('Competência')
+        if comparar_cidades:
+            cidades_comp = (
+                df_mun.sort_values('saldo_vagas', ascending=False).head(5)['nome_municipio'].tolist()
+                if qtd_mun > 6 else df_mun['nome_municipio'].tolist()
+            )
+            df_tempo = df_filtrado[df_filtrado['nome_municipio'].isin(cidades_comp)].dropna(
+                subset=['competênciamov']
+            ).groupby(['competênciamov', 'nome_municipio'], as_index=False).agg(
+                Admissões=('admissoes', 'sum'),
+                Demissões=('demissoes', 'sum')
+            )
+            df_tempo['Saldo Líquido'] = df_tempo['Admissões'] - df_tempo['Demissões']
+            comp_str = df_tempo['competênciamov'].astype(str).str.replace(r'\.0$', '', regex=True)
+            df_tempo['Competência'] = pd.to_datetime(comp_str, format='%Y%m').dt.strftime('%Y-%m')
+            df_tempo = df_tempo.sort_values('Competência')
 
-        fig_tempo = px.line(
-            df_tempo,
-            x='Competência',
-            y=['Admissões', 'Demissões', 'Saldo Líquido'],
-            markers=True,
-            color_discrete_map={
-                'Admissões': '#1f77b4',
-                'Demissões': '#d62728',
-                'Saldo Líquido': '#2ca02c'
-            },
-            labels={'Competência': 'Mês de Referência', 'value': 'Quantidade de Vínculos', 'variable': 'Indicador'}
-        )
+            fig_tempo = px.line(
+                df_tempo,
+                x='Competência',
+                y='Saldo Líquido',
+                color='nome_municipio',
+                markers=True,
+                labels={'Competência': 'Mês de Referência', 'Saldo Líquido': 'Saldo Líquido de Vagas', 'nome_municipio': 'Município'}
+            )
+        else:
+            df_tempo = df_filtrado.dropna(subset=['competênciamov']).groupby('competênciamov', as_index=False).agg(
+                Admissões=('admissoes', 'sum'),
+                Demissões=('demissoes', 'sum')
+            )
+            df_tempo['Saldo Líquido'] = df_tempo['Admissões'] - df_tempo['Demissões']
+            comp_str = df_tempo['competênciamov'].astype(str).str.replace(r'\.0$', '', regex=True)
+            df_tempo['Competência'] = pd.to_datetime(comp_str, format='%Y%m').dt.strftime('%Y-%m')
+            df_tempo = df_tempo.sort_values('Competência')
+
+            fig_tempo = px.line(
+                df_tempo,
+                x='Competência',
+                y=['Admissões', 'Demissões', 'Saldo Líquido'],
+                markers=True,
+                color_discrete_map={
+                    'Admissões': '#1f77b4',
+                    'Demissões': '#d62728',
+                    'Saldo Líquido': '#2ca02c'
+                },
+                labels={'Competência': 'Mês de Referência', 'value': 'Quantidade de Vínculos', 'variable': 'Indicador'}
+            )
+
         fig_tempo.add_hline(y=0, line_dash="dash", line_color="gray", opacity=0.6)
         st.plotly_chart(fig_tempo, width='stretch')
-    else:
-        st.warning("Coluna 'competênciamov' ausente na base compactada. Execute 'python otimizar_base.py' e envie o arquivo .csv.gz atualizado.")
-
+        
 # --- EIXO 2: PERFIL SOCIOECONÔMICO ---
 with aba2:
     st.subheader("Diagnóstico de Atratividade: Salário Médio vs. Rotatividade (Turnover)")
