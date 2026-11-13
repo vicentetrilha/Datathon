@@ -143,6 +143,38 @@ with aba1:
         )
         st.plotly_chart(fig_set, width='stretch')
 
+    st.divider()
+    st.subheader("Projeção de Sazonalidade: Evolução Mensal (Janela de 12 Meses)")
+    st.info(
+        "**Nota Metodológica e Limite da Análise:** Como a base fornecida contempla apenas os últimos 12 meses de movimentações, "
+        "a curva abaixo representa uma **projeção/indicativo de comportamento sazonal** (oscilações intranuais). "
+        "Para validar estatisticamente um padrão sazonal recorrente, seria necessária a incorporação de séries históricas de anos anteriores."
+    )
+
+    df_tempo = df_filtrado.dropna(subset=['competênciamov']).groupby('competênciamov', as_index=False).agg(
+        Admissões=('admissoes', 'sum'),
+        Demissões=('demissoes', 'sum')
+    )
+    df_tempo['Saldo Líquido'] = df_tempo['Admissões'] - df_tempo['Demissões']
+    comp_str = df_tempo['competênciamov'].astype(str).str.replace(r'\.0$', '', regex=True)
+    df_tempo['Competência'] = pd.to_datetime(comp_str, format='%Y%m').dt.strftime('%Y-%m')
+    df_tempo = df_tempo.sort_values('Competência')
+
+    fig_tempo = px.line(
+        df_tempo,
+        x='Competência',
+        y=['Admissões', 'Demissões', 'Saldo Líquido'],
+        markers=True,
+        color_discrete_map={
+            'Admissões': '#1f77b4',
+            'Demissões': '#d62728',
+            'Saldo Líquido': '#2ca02c'
+        },
+        labels={'Competência': 'Mês de Referência', 'value': 'Quantidade de Vínculos', 'variable': 'Indicador'}
+    )
+    fig_tempo.add_hline(y=0, line_dash="dash", line_color="gray", opacity=0.6)
+    st.plotly_chart(fig_tempo, width='stretch')
+
 # --- EIXO 2: PERFIL SOCIOECONÔMICO ---
 with aba2:
     st.subheader("Diagnóstico de Atratividade: Salário Médio vs. Rotatividade (Turnover)")
