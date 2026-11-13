@@ -32,6 +32,7 @@ O painel conta com **4 KPIs estratégicos** no topo (Saldo Líquido, Saldo por 1
 * `ia_generativa.py` — Enriquecimento das ocupações via **Gemini API** (com *fallback* determinístico baseado nos Grandes Grupos da CBO 2002).
 * `otimizar_base.py` — Geração do cubo analítico compactado (`Base_Dashboard_Otimizada.csv.gz`) preservando somas, contagens exatas e competência mensal para deploy em nuvem.
 * `Base_Dashboard_Otimizada.csv.gz` — Base tratada e otimizada consumida pelo dashboard.
+* `iniciar_dashboard.bat` — Atalho executável para Windows que ativa o ambiente virtual (se existir) e inicia o dashboard localmente com um duplo clique.
 * `Dicionario_CBO_Enriquecido.csv` & `Prompt_Macrofamilias_CBO.txt` — Dicionário de mapeamento ocupacional e prompt estruturado utilizado na etapa de IA.
 * `Agregado_Municipio_Setor.csv` & `Top_10_Municipios_Saldo.csv` — Tabelas analíticas intermediárias exportadas pelo pipeline.
 * `requirements.txt` — Dependências Python necessárias para execução.
@@ -49,6 +50,10 @@ O painel conta com **4 KPIs estratégicos** no topo (Saldo Líquido, Saldo por 1
 
 ## Execução Local (Plano de Contingência)
 
+**Opção 1 — Execução Rápida (Windows):**
+Dê um duplo clique no arquivo **`iniciar_dashboard.bat`** na pasta raiz do projeto para iniciar o servidor local em `http://localhost:8501`.
+
+**Opção 2 — Via Terminal:**
 ```bash
 git clone <URL-DO-REPOSITORIO>
 cd Datathon
